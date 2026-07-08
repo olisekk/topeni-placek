@@ -112,13 +112,6 @@ const GLOBAL_CSS = `
     .desktop-nav { display:none !important; }
     .hamburger   { display:flex !important; }
   }
-
-  /* section accent */
-  .section-label {
-    display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.2px;
-    text-transform:uppercase; color:#c94f10;
-    margin-bottom:10px;
-  }
   .divider {
     width:44px; height:3px; border-radius:2px;
     background:linear-gradient(90deg,#c94f10,#e07a40);
@@ -411,7 +404,6 @@ function Services() {
     <section id="sluzby" style={{ width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <Reveal>
-          <span className="section-label">Naše práce</span>
           <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15, marginBottom: 0 }}>
             Instalatérské služby
           </h2>
@@ -479,7 +471,6 @@ function WhyUs() {
     <section id="proc-my" style={{ width: "100%", background: "#fff", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <Reveal>
-          <span className="section-label">Proč Topení Plaček</span>
           <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15 }}>
             Co zákazníci oceňují
           </h2>
@@ -525,7 +516,6 @@ function Contact() {
     <section id="kontakt" style={{ width: "100%", width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 960, margin: "0 auto" }}>
         <Reveal>
-          <span className="section-label">Kontakt</span>
           <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15 }}>
             Zavolejte nebo napište
           </h2>
