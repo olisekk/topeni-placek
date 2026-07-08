@@ -8,9 +8,9 @@ const EMAIL_HREF = "mailto:placek-petr@seznam.cz";
 
 const schemaData = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Topení Plaček",
-  "description": "Instalatér – voda, topení, plyn, odpady, koupelny. Moravskoslezský a Olomoucký kraj. Více než 30 let zkušeností.",
+  "@type": "Plumber",
+  "name": "Topení Plaček – Instalatér Opava",
+  "description": "Instalatér Opava – voda, topení, plyn. Rychlé zásahy v Opavě a okolí (Kravaře, Hlučín, Hradec nad Moravicí, Vítkov, Bolatice, Štěpánkovice). Více než 30 let zkušeností.",
   "telephone": "+420775228191",
   "email": EMAIL,
   "address": {
@@ -19,7 +19,17 @@ const schemaData = {
     "addressRegion": "Moravskoslezský kraj",
     "addressCountry": "CZ"
   },
-  "areaServed": ["Moravskoslezský kraj", "Olomoucký kraj"],
+  "areaServed": [
+    { "@type": "City", "name": "Opava" },
+    { "@type": "City", "name": "Kravaře" },
+    { "@type": "City", "name": "Hlučín" },
+    { "@type": "City", "name": "Hradec nad Moravicí" },
+    { "@type": "City", "name": "Vítkov" },
+    { "@type": "City", "name": "Bolatice" },
+    { "@type": "City", "name": "Štěpánkovice" },
+    "Moravskoslezský kraj",
+    "Olomoucký kraj"
+  ],
   "openingHours": "Mo-Fr 07:00-17:00",
   "priceRange": "$$"
 };
@@ -59,11 +69,7 @@ function Reveal({ children, delay = 0, x = 0, y = 24, style = {} }) {
 const GLOBAL_CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { background: #f4f8fc; overflow-x: hidden; margin: 0 !important; padding: 0 !important; }
-  #root, #root > div { width: 100% !important; max-width: 100% !important; }
-  main { display: block; width: 100%; }
-  #root { width: 100%; }
-  .tp-root { width: 100%; }
+  body { background: #f4f8fc; overflow-x: hidden; }
   img  { max-width: 100%; display: block; }
 
   .tp-root { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2636; }
@@ -108,12 +114,12 @@ const GLOBAL_CSS = `
   .section-label {
     display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.2px;
     text-transform:uppercase; color:#c94f10;
-    margin-bottom:10px;
+    border-left:3px solid #c94f10; padding-left:10px; margin-bottom:14px;
   }
   .divider {
     width:44px; height:3px; border-radius:2px;
     background:linear-gradient(90deg,#c94f10,#e07a40);
-    margin-top:10px;
+    margin-top:14px;
   }
 
   /* footer links */
@@ -126,7 +132,18 @@ const GLOBAL_CSS = `
     .hero-btns { flex-direction: column !important; align-items: stretch !important; }
     .hero-btns a { text-align: center; justify-content: center; }
     .contact-grid { grid-template-columns: 1fr !important; }
-    .stat-card-num { font-size: 22px !important; }
+
+    /* trust row -> clean 2x2 grid, no stray side borders */
+    .trust-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px 12px !important; }
+    .trust-item { border-left: none !important; padding-left: 0 !important; }
+
+    /* footer stacks and centers on small screens */
+    .footer-inner { flex-direction: column !important; text-align: center; align-items: center !important; }
+    .footer-contacts { align-items: center !important; }
+  }
+
+  @media (max-width:420px) {
+    .hero-title { font-size: clamp(26px, 8vw, 34px) !important; }
   }
 `;
 
@@ -275,19 +292,21 @@ function Hero() {
       <div style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}>
         <div style={anim(0)}>
           <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 11.5, fontWeight: 700, letterSpacing: 2.2, textTransform: "uppercase", color: "#5a9ac8" }}>
-            Moravskoslezský kraj · Olomoucký kraj · více než 30 let v oboru
+            Opava a okolí · více než 30 let v oboru
           </span>
         </div>
 
-        <h1 style={{
+        <h1 className="hero-title" style={{
           ...anim(110),
           fontFamily: "'Fraunces', serif",
           fontSize: "clamp(28px, 5.5vw, 56px)",
           fontWeight: 700, lineHeight: 1.1,
           marginTop: 16, marginBottom: 20, letterSpacing: -0.5
         }}>
-          Instalatérské práce<br />
-          <em style={{ fontStyle: "italic", color: "#6ab2e0" }}>topení, voda, plyn</em> a odpady
+          Instalatér Opava<br />
+          <em style={{ fontStyle: "italic", color: "#2a6fa8" }}>voda</em>,{" "}
+          <em style={{ fontStyle: "italic", color: "#e0b400" }}>plyn</em>,{" "}
+          <em style={{ fontStyle: "italic", color: "#c94f10" }}>topení</em>
         </h1>
 
         <p style={{
@@ -296,7 +315,7 @@ function Hero() {
           fontSize: "clamp(15px, 2vw, 17px)",
           color: "#8ab0cc", maxWidth: 520, lineHeight: 1.82, marginBottom: 36
         }}>
-          Profesionální instalatérské a topenářské práce po celém Moravskoslezském a Olomouckém kraji. Více než 30 let zkušeností, férové ceny a cena sdělená předem.
+          Profesionální instalatérské a topenářské práce v Opavě a okolí (Kravaře, Hlučín, Hradec nad Moravicí, Vítkov). Více než 30 let zkušeností, férové ceny a cena sdělená předem.
         </p>
 
         <div className="hero-btns" style={{ ...anim(310), display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
@@ -332,7 +351,7 @@ function Hero() {
         </div>
 
         {/* trust row */}
-        <div style={{
+        <div className="trust-row" style={{
           ...anim(400),
           display: "flex", gap: 0, flexWrap: "wrap", marginTop: 48,
           borderTop: "1px solid rgba(255,255,255,.07)", paddingTop: 28
@@ -343,10 +362,9 @@ function Hero() {
             { val: "100%", label: "cena předem" },
             { val: "Domácnosti\ni firmy", label: "zákazníci" },
           ].map((s, i) => (
-            <div key={i} style={{
+            <div key={i} className="trust-item" style={{
               flex: "1 1 120px",
               borderLeft: i > 0 ? "1px solid rgba(255,255,255,.07)" : "none",
-              padding: "0 28px 0 (i===0?0:28px)",
               paddingLeft: i === 0 ? 0 : 28
             }}>
               <div style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: "clamp(20px,2.5vw,26px)", color: "#6ab2e0", whiteSpace: "pre-line", lineHeight: 1.1 }}>{s.val}</div>
@@ -364,15 +382,15 @@ const services = [
   {
     title: "Voda",
     slug: "voda",
-    short: "Opravy a rozvody vody — od výměny kohoutu po kompletní nové rozvody.",
-    items: ["Opravy a výměna vodovodního potrubí", "Nové rozvody studené a teplé vody", "Výměna baterií, kohoutů a splachovačů", "Opravy úniků a prasknutého potrubí", "Připojení spotřebičů (myčka, pračka)", "Tlakové zkoušky potrubí"],
+    short: "Opravy vodovodních baterií, kohoutů a připojení spotřebičů.",
+    items: ["Výměna baterií, kohoutů a splachovačů", "Opravy úniků a prasknutého potrubí", "Připojení spotřebičů (myčka, pračka)", "Instalace sifónů a zápachových uzávěrek", "Tlakové zkoušky potrubí", "Drobné opravy a servis"],
     color: "#2a6fa8"
   },
   {
     title: "Topení",
     slug: "topeni",
-    short: "Montáž, servis a opravy kotlů, radiátorů i podlahového vytápění.",
-    items: ["Instalace a výměna plynových kotlů", "Montáž a opravy radiátorů", "Podlahové vytápění – instalace a servis", "Odvzdušnění topné soustavy", "Roční servis kotlů", "Opravy poruch topné soustavy"],
+    short: "Podlahové topení, rozvody vody a odpadní potrubí, kotle i radiátory.",
+    items: ["Podlahové vytápění – instalace a servis", "Nové rozvody studené a teplé vody", "Odpadní potrubí a kanalizace", "Instalace a výměna plynových kotlů", "Montáž a opravy radiátorů", "Roční servis a odvzdušnění soustavy"],
     color: "#c94f10"
   },
   {
@@ -381,20 +399,6 @@ const services = [
     short: "Plynové rozvody, připojení spotřebičů, revize — odborně a bezpečně.",
     items: ["Montáž a opravy plynového potrubí", "Připojení plynových spotřebičů", "Instalace plynových kotlů", "Revize plynových zařízení", "Detekce úniků plynu", "Přeložky a rekonstrukce rozvodů"],
     color: "#1a7a50"
-  },
-  {
-    title: "Odpady",
-    slug: "odpady",
-    short: "Čištění a opravy kanalizace, odpadního potrubí a sifónů.",
-    items: ["Čištění ucpaných odpadů a kanalizace", "Opravy a výměna odpadního potrubí", "Protlačení a proplach kanalizace", "Instalace sifónů", "Opravy těsnosti kanalizace", "Připojení nových zařizovacích předmětů"],
-    color: "#4a6272"
-  },
-  {
-    title: "Rekonstrukce koupelen",
-    slug: "koupelny",
-    short: "Kompletní rekonstrukce koupelny na klíč – projekt, rozvody, montáž.",
-    items: ["Rekonstrukce koupelny na klíč", "Instalace van, sprch a umyvadel", "Rozvody vody a odpadů", "Montáž radiátorů a topných žebříků", "Instalace WC a nádržek", "Konzultace a návrh dispozice"],
-    color: "#5a3a88"
   },
 ];
 
@@ -409,7 +413,7 @@ function Services() {
           </h2>
           <div className="divider" />
           <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 500, lineHeight: 1.72, marginTop: 18 }}>
-            Od drobné opravy po rekonstrukci celé koupelny nebo výměnu kotle. Vše řešíme na místě, s jasnou cenou předem.
+            Od drobné opravy po výměnu kotle. Vše řešíme na místě, s jasnou cenou předem.
           </p>
         </Reveal>
 
@@ -462,7 +466,7 @@ function WhyUs() {
     { title: "Více než 30 let zkušeností", desc: "Instalatérskému řemeslu se věnujeme od roku 1991. Za tu dobu jsme realizovali stovky zakázek — od výměny kohoutku po komplexní rekonstrukce." },
     { title: "Cena sdělená předem", desc: "Před zahájením každé práce sdělíme odhadovanou cenu a držíme se jí. Pokud se cokoliv změní, informujeme zákazníka vždy předem." },
     { title: "Poctivá práce", desc: "Záleží nám na tom, aby oprava nebo instalace vydržela. Nepoužíváme levné náhradní díly tam, kde by to mohlo způsobit problémy." },
-    { title: "Celý Moravskoslezský a Olomoucký kraj", desc: "Vyjíždíme k zákazníkům po celém regionu — domácnostem i firmám, bez ohledu na vzdálenost v rámci obou krajů." },
+    { title: "Opava a celý region", desc: "Sídlíme v Opavě a jezdíme po celém okolí — Kravaře, Hlučín, Hradec nad Moravicí, Vítkov i zbytek Moravskoslezského a Olomouckého kraje." },
     { title: "Osobní přístup", desc: "Každou zakázku posuzujeme osobně na místě. Nejsme zprostředkovatel — přijedeme, podíváme se a řekneme reálné řešení." },
     { title: "Domácnosti i firmy", desc: "Pracujeme pro soukromé zákazníky, bytová družstva i menší firmy. Referenční kontakty poskytneme na vyžádání." },
   ];
@@ -532,12 +536,13 @@ function Contact() {
           <Reveal x={-20} y={0}>
             <div style={{ background: "#1a2636", borderRadius: 12, padding: "clamp(22px,4vw,32px) clamp(20px,3.5vw,28px)", color: "#fff", marginBottom: 14 }}>
               {[
+                { label: "Sídlo", content: <div style={{ color: "#7ab8e0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15 }}>Opava-Komárov</div> },
                 { label: "Telefon", content: <a href={PHONE_HREF} style={{ color: "#fff", textDecoration: "none", fontFamily: "'Fraunces', serif", fontSize: "clamp(20px,3vw,26px)", fontWeight: 600, display: "block", marginTop: 3 }}>{PHONE}</a> },
                 { label: "E-mail", content: <a href={EMAIL_HREF} style={{ color: "#7ab8e0", textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15 }}>{EMAIL}</a> },
-                { label: "Oblast působení", content: <div style={{ color: "#7ab8e0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, lineHeight: 1.6 }}>Moravskoslezský kraj<br />Olomoucký kraj</div> },
+                { label: "Oblast působení", content: <div style={{ color: "#7ab8e0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15, lineHeight: 1.6 }}>Opava, Kravaře, Hlučín, Hradec nad Moravicí, Vítkov<br />a celý Moravskoslezský a Olomoucký kraj</div> },
                 { label: "Pracovní doba", content: <div style={{ color: "#7ab8e0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 15 }}>Pondělí – pátek: 7:00 – 17:00</div> },
               ].map((row, i) => (
-                <div key={i} style={{ marginBottom: i < 3 ? 22 : 0 }}>
+                <div key={i} style={{ marginBottom: i < 4 ? 22 : 0 }}>
                   <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 10.5, letterSpacing: 1.8, textTransform: "uppercase", color: "#3a6080", marginBottom: 4 }}>{row.label}</div>
                   {row.content}
                 </div>
@@ -626,13 +631,13 @@ function Contact() {
 function Footer() {
   return (
     <footer style={{ background: "#0b1822", color: "#4a7a9a", padding: "32px 24px" }}>
-      <div style={{ maxWidth: 1080, margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "space-between", alignItems: "center" }}>
+      <div className="footer-inner" style={{ maxWidth: 1080, margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: 17, color: "#c0d8ec", marginBottom: 4 }}>Topení Plaček</div>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13 }}>Voda · Topení · Plyn · Odpady · Koupelny</div>
-          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12, marginTop: 4 }}>Moravskoslezský a Olomoucký kraj</div>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13 }}>Voda · Topení · Plyn</div>
+          <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12, marginTop: 4 }}>Opava a okolí · Moravskoslezský a Olomoucký kraj</div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
+        <div className="footer-contacts" style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-end" }}>
           <a href={PHONE_HREF} className="foot-link" style={{ color: "#4a7a9a", textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 14, fontWeight: 600 }}>{PHONE}</a>
           <a href={EMAIL_HREF} className="foot-link" style={{ color: "#4a7a9a", textDecoration: "none", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13 }}>{EMAIL}</a>
         </div>
@@ -702,6 +707,11 @@ export default function App() {
   }, [showIntro]);
 
   useEffect(() => {
+    // Viewport (ensures correct mobile scaling/zoom)
+    let vp = document.querySelector('meta[name="viewport"]');
+    if (!vp) { vp = document.createElement("meta"); vp.name = "viewport"; document.head.appendChild(vp); }
+    vp.content = "width=device-width, initial-scale=1, maximum-scale=5";
+
     // Fonts
     const link = document.createElement("link");
     link.href = "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&display=swap";
@@ -715,10 +725,10 @@ export default function App() {
     document.head.appendChild(s);
 
     // Meta
-    document.title = "Topení Plaček – Instalatér Moravskoslezský a Olomoucký kraj | 775 228 191";
+    document.title = "Instalatér Opava – Topení Plaček | Voda, topení, plyn | 775 228 191";
     let m = document.querySelector('meta[name="description"]');
     if (!m) { m = document.createElement("meta"); m.name = "description"; document.head.appendChild(m); }
-    m.content = "Topení Plaček – profesionální instalatérské a topenářské práce v Moravskoslezském a Olomouckém kraji. Voda, topení, plyn, odpady, koupelny. Více než 30 let zkušeností. Tel: 775 228 191.";
+    m.content = "Instalatér Opava – Topení Plaček. Profesionální instalatérské a topenářské práce v Opavě a okolí (Kravaře, Hlučín, Hradec nad Moravicí). Voda, topení, plyn. Více než 30 let zkušeností. Tel: 775 228 191.";
 
     // CSS
     const style = document.createElement("style");
@@ -733,7 +743,6 @@ export default function App() {
       </AnimatePresence>
       <motion.div
         className="tp-root"
-        style={{ width: "100%", minWidth: 0 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: showIntro ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeIn" }}
