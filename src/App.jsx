@@ -75,6 +75,8 @@ const GLOBAL_CSS = `
   img  { max-width: 100%; display: block; }
 
   section, nav, footer { width: 100%; box-sizing: border-box; }
+  section > div { text-align: left; }
+  section > div > div { text-align: left; }
   .tp-root { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2636; }
 
   /* phone pulse */
@@ -100,7 +102,8 @@ const GLOBAL_CSS = `
   /* cards */
   .service-card { transition: transform .22s ease, box-shadow .22s ease; }
   .service-card:hover { transform:translateY(-5px); box-shadow:0 18px 44px rgba(26,38,54,.13) !important; }
-  .why-card { transition: border-color .2s ease, transform .2s ease; }
+  .why-card { transition: border-color .2s ease, transform .2s ease; text-align: left; }
+  .service-card { text-align: left; }
   .why-card:hover { border-color:#2a6fa8 !important; transform:translateY(-3px); }
 
   /* inputs */
@@ -115,7 +118,7 @@ const GLOBAL_CSS = `
   .divider {
     width:44px; height:3px; border-radius:2px;
     background:linear-gradient(90deg,#c94f10,#e07a40);
-    margin-top:14px;
+    margin-top:12px; margin-left:0;
   }
 
   /* footer links */
@@ -404,11 +407,11 @@ function Services() {
     <section id="sluzby" style={{ width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <Reveal>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15, marginBottom: 0 }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15, marginBottom: 0, textAlign: "left" }}>
             Instalatérské služby
           </h2>
           <div className="divider" />
-          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 500, lineHeight: 1.72, marginTop: 18 }}>
+          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 500, lineHeight: 1.72, marginTop: 18, textAlign: "left", textAlign: "left" }}>
             Od drobné opravy po výměnu kotle. Vše řešíme na místě, s jasnou cenou předem.
           </p>
         </Reveal>
@@ -469,13 +472,13 @@ function WhyUs() {
 
   return (
     <section id="proc-my" style={{ width: "100%", background: "#fff", padding: "clamp(56px,8vw,88px) 24px" }}>
-      <div style={{ maxWidth: 1080, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1080, margin: "0 auto", textAlign: "left" }}>
         <Reveal>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15, textAlign: "left" }}>
             Co zákazníci oceňují
           </h2>
           <div className="divider" />
-          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 480, lineHeight: 1.72, marginTop: 18 }}>
+          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 480, lineHeight: 1.72, marginTop: 18, textAlign: "left", textAlign: "left" }}>
             Žádné marketingové sliby — jen věci, které zákazníci skutečně oceňují.
           </p>
         </Reveal>
@@ -485,10 +488,10 @@ function WhyUs() {
             <Reveal key={r.title} delay={i * 60}>
               <div className="why-card" style={{
                 background: "#f7fafd", borderRadius: 9,
-                padding: "22px 20px", border: "1.5px solid #dce8f2", height: "100%"
+                padding: "22px 20px", border: "1.5px solid #dce8f2", height: "100%", textAlign: "left"
               }}>
-                <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: 15.5, color: "#1a2636", fontWeight: 700, marginBottom: 9, lineHeight: 1.3 }}>{r.title}</h3>
-                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13.5, color: "#4a6a8a", lineHeight: 1.7 }}>{r.desc}</p>
+                <h3 style={{ fontFamily: "'Fraunces', serif", fontSize: 15.5, color: "#1a2636", fontWeight: 700, marginBottom: 9, lineHeight: 1.3, textAlign: "left" }}>{r.title}</h3>
+                <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 13.5, color: "#4a6a8a", lineHeight: 1.7, textAlign: "left" }}>{r.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -516,11 +519,11 @@ function Contact() {
     <section id="kontakt" style={{ width: "100%", width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 960, margin: "0 auto" }}>
         <Reveal>
-          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15 }}>
+          <h2 style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(24px,3.5vw,38px)", color: "#1a2636", fontWeight: 700, lineHeight: 1.15, textAlign: "left" }}>
             Zavolejte nebo napište
           </h2>
           <div className="divider" />
-          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 430, lineHeight: 1.72, marginTop: 18 }}>
+          <p style={{ color: "#4a6a8a", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 16, maxWidth: 430, lineHeight: 1.72, marginTop: 18, textAlign: "left", textAlign: "left" }}>
             Volejte v pracovní době, nebo nám napište — ozveme se co nejdříve.
           </p>
         </Reveal>
