@@ -69,7 +69,9 @@ function Reveal({ children, delay = 0, x = 0, y = 24, style = {} }) {
 const GLOBAL_CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { background: #f4f8fc; overflow-x: hidden; }
+  body { background: #f4f8fc; overflow-x: hidden; margin: 0 !important; padding: 0 !important; }
+  #root, #root > div { width: 100% !important; max-width: 100% !important; }
+  main { display: block; width: 100%; }
   img  { max-width: 100%; display: block; }
 
   .tp-root { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2636; }
@@ -114,7 +116,7 @@ const GLOBAL_CSS = `
   .section-label {
     display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.2px;
     text-transform:uppercase; color:#c94f10;
-    border-left:3px solid #c94f10; padding-left:10px; margin-bottom:14px;
+    margin-bottom:10px;
   }
   .divider {
     width:44px; height:3px; border-radius:2px;
@@ -743,6 +745,7 @@ export default function App() {
       </AnimatePresence>
       <motion.div
         className="tp-root"
+        style={{ width: "100%" }}
         initial={{ opacity: 0 }}
         animate={{ opacity: showIntro ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeIn" }}
