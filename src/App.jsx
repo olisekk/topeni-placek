@@ -74,6 +74,7 @@ const GLOBAL_CSS = `
   main { display: block; width: 100%; }
   img  { max-width: 100%; display: block; }
 
+  section, nav, footer { width: 100%; box-sizing: border-box; }
   .tp-root { font-family: 'Plus Jakarta Sans', sans-serif; color: #1a2636; }
 
   /* phone pulse */
@@ -167,6 +168,7 @@ function Navbar() {
 
   return (
     <nav style={{
+      width: "100%",
       background: "#fff",
       position: "sticky", top: 0, zIndex: 200,
       borderBottom: "1px solid #e0eaf4",
@@ -280,7 +282,7 @@ function Hero() {
 
   return (
     <section style={{
-      background: "linear-gradient(150deg, #091929 0%, #102338 40%, #183350 100%)",
+      width: "100%", background: "linear-gradient(150deg, #091929 0%, #102338 40%, #183350 100%)",
       color: "#fff",
       padding: "clamp(56px,9vw,96px) 24px clamp(52px,8vw,88px)",
       position: "relative", overflow: "hidden"
@@ -406,7 +408,7 @@ const services = [
 
 function Services() {
   return (
-    <section id="sluzby" style={{ background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
+    <section id="sluzby" style={{ width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <Reveal>
           <span className="section-label">Naše práce</span>
@@ -474,7 +476,7 @@ function WhyUs() {
   ];
 
   return (
-    <section id="proc-my" style={{ background: "#fff", padding: "clamp(56px,8vw,88px) 24px" }}>
+    <section id="proc-my" style={{ width: "100%", background: "#fff", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 1080, margin: "0 auto" }}>
         <Reveal>
           <span className="section-label">Proč Topení Plaček</span>
@@ -520,7 +522,7 @@ function Contact() {
   const lbl = { display: "block", fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: 12.5, fontWeight: 700, color: "#3a5878", marginBottom: 5 };
 
   return (
-    <section id="kontakt" style={{ background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
+    <section id="kontakt" style={{ width: "100%", width: "100%", background: "#f4f8fc", padding: "clamp(56px,8vw,88px) 24px" }}>
       <div style={{ maxWidth: 960, margin: "0 auto" }}>
         <Reveal>
           <span className="section-label">Kontakt</span>
@@ -632,7 +634,7 @@ function Contact() {
 /* ─── Footer ─────────────────────────────────────────────────── */
 function Footer() {
   return (
-    <footer style={{ background: "#0b1822", color: "#4a7a9a", padding: "32px 24px" }}>
+    <footer style={{ width: "100%", background: "#0b1822", color: "#4a7a9a", padding: "32px 24px" }}>
       <div className="footer-inner" style={{ maxWidth: 1080, margin: "0 auto", display: "flex", flexWrap: "wrap", gap: 20, justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontFamily: "'Fraunces', serif", fontWeight: 700, fontSize: 17, color: "#c0d8ec", marginBottom: 4 }}>Topení Plaček</div>
